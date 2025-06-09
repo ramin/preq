@@ -8,6 +8,7 @@ on:
     branches:
       - main
       - develop
+      - ci/mod-tidy-check
   pull_request:
     branches:
       - main
@@ -30,6 +31,11 @@ jobs:
 
       - name: Verify Go Version
         run: go version
+
+      - name: Check and Verify go.mod
+        run: |
+          go mod tidy
+          go mod verify
 
       - name: Run preq tests
         run: |
